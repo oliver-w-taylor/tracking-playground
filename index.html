@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Oliver's Tracking Playground</title>
+  <script>
+    // The page queues actions here. GTM tags will send them to GA4 once configured.
+    window.dataLayer = window.dataLayer || [];
+  </script>
+  <!-- GTM HEAD SNIPPET: add your own container snippet here in the next lesson. -->
+  <style>
+    :root { color-scheme: light; font-family: system-ui, sans-serif; color: #172b42; background: #f2f5f9; }
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+    header, main, footer { max-width: 960px; margin: auto; padding: 28px 22px; }
+    header { display: flex; justify-content: space-between; gap: 18px; align-items: center; }
+    nav { display: flex; flex-wrap: wrap; gap: 18px; }
+    a { color: #155ea5; }
+    .hero { background: #173954; color: white; padding: 42px; border-radius: 18px; }
+    .hero p { max-width: 620px; }
+    h1 { font-size: clamp(2rem, 5vw, 3rem); line-height: 1.12; margin: 12px 0 20px; }
+    h2 { font-size: 1.4rem; margin-top: 0; }
+    p { line-height: 1.65; }
+    .label { font-size: .8rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-top: 24px; }
+    .card { background: white; padding: 28px; border: 1px solid #d9e2eb; border-radius: 16px; }
+    button { background: #155ea5; color: white; border: none; border-radius: 8px; padding: 13px 19px; font: inherit; font-weight: 650; cursor: pointer; }
+    button:hover { background: #114d88; }
+    button:disabled { background: #d2dae3; color: #42566b; cursor: default; }
+    button:focus-visible, a:focus-visible, select:focus-visible { outline: 3px solid #e9a93b; outline-offset: 4px; }
+    .hero button { background: #ffd079; color: #172b42; }
+    .hero button:hover { background: #ffc25a; }
+    .secondary { background: #e9eff6; color: #172b42; }
+    .secondary:hover { background: #dce6f0; }
+    .actions { display: flex; flex-wrap: wrap; gap: 10px; }
+    label { display: block; font-weight: 600; margin: 18px 0 8px; }
+    select { width: 100%; padding: 12px; margin-bottom: 18px; border: 1px solid #a5b7c9; border-radius: 8px; font: inherit; background: white; }
+    .price { font-size: 2rem; font-weight: 750; }
+    .message { min-height: 48px; font-size: .95rem; }
+    .reading { margin-top: 24px; }
+    .reading p { max-width: 720px; margin: 28px 0; }
+    #action-log { background: #102639; color: #d5e7f7; padding: 18px; border-radius: 8px; overflow: auto; max-height: 280px; white-space: pre-wrap; font-size: .85rem; }
+    footer { font-size: .85rem; color: #52657a; }
+    @media (max-width: 650px) { .grid { grid-template-columns: 1fr; } .hero { padding: 28px; } header { align-items: flex-start; flex-direction: column; } }
+  </style>
+</head>
+<body>
+  <!-- GTM BODY NOSCRIPT: add your own container snippet immediately below this comment. -->
+  <header>
+    <strong>Oliver's Tracking Playground</strong>
+    <nav aria-label="Main navigation">
+      <a href="#enquiry">Enquiry</a>
+      <a href="#shop">Demo shop</a>
+      <a href="#practice">Reading section</a>
+    </nav>
+  </header>
+  <main>
+    <section class="hero" aria-labelledby="hero-title">
+      <span class="label">Learning environment</span>
+      <h1 id="hero-title">A small page.<br>Plenty to practise.</h1>
+      <p>Use the button, send a mock enquiry and try a simulated purchase. Every action is a chance to build and check your tracking.</p>
+      <button id="hero-cta" type="button" data-cta-location="hero">Find out more</button>
+      <p id="cta-message" class="message" role="status"></p>
+    </section>
+    <div class="grid">
+      <section id="enquiry" class="card" aria-labelledby="enquiry-title">
+        <h2 id="enquiry-title">Send a mock enquiry</h2>
+        <p>Choose a topic. This form simulates success locally; it does not send an email or collect contact details.</p>
+        <form id="enquiry-form">
+          <label for="enquiry-topic">What would you like to explore?</label>
+          <select id="enquiry-topic" required>
+            <option value="">Choose a topic</option>
+            <option value="paid_media">Paid media</option>
+            <option value="tracking">Conversion tracking</option>
+            <option value="analytics">Analytics</option>
+          </select>
+          <button id="enquiry-submit" type="submit">Send mock enquiry</button>
+        </form>
+        <p id="form-message" class="message" role="status"></p>
+      </section>
+      <section id="shop" class="card" aria-labelledby="shop-title">
+        <h2 id="shop-title">Demo shop</h2>
+        <p>Practice notebook</p>
+        <p class="price">€19.00</p>
+        <p>Dummy product. No payment, delivery or real order.</p>
+        <div class="actions">
+          <button id="add-to-cart" type="button">Add to basket</button>
+          <button id="simulate-purchase" type="button" class="secondary" disabled>Simulate purchase</button>
+        </div>
+        <p id="cart-message" class="message" role="status">Your basket is empty.</p>
+      </section>
+    </div>
+    <section id="practice" class="card reading" aria-labelledby="practice-title">
+      <h2 id="practice-title">Room to practise scrolling</h2>
+      <p>A page view tells you someone arrived. A button click tells you they interacted with a particular call to action. Decide what the action means before choosing how to measure it.</p>
+      <p>An attempted form submission and a successful submission are different actions. Try submitting the mock enquiry without choosing a topic, then choose one and try again.</p>
+      <p>A useful check includes cases where a tag should fire and cases where it should stay silent. Check the exact element, event name and parameter values rather than relying on a total event count.</p>
+      <p>In this shop, adding a notebook and completing a simulated purchase are separate actions. The purchase includes the basket quantity, its value, a currency and a new transaction ID.</p>
+      <p>Use this section to practise scroll triggers. Try different thresholds, and check whether returning to the top and scrolling again produces the behaviour you intended.</p>
+      <a id="documentation-link" href="https://support.google.com/tagmanager/" target="_blank" rel="noopener noreferrer">Open Google's Tag Manager documentation</a>
+    </section>
+    <section class="card reading" aria-labelledby="log-title">
+      <h2 id="log-title">Local action log</h2>
+      <p>This log shows the events queued in this page's data layer. It does not prove delivery to an analytics service. Check that separately in Tag Assistant and GA4.</p>
+      <pre id="action-log" aria-label="Local data layer event log">No actions yet.</pre>
+      <button id="reset-practice" type="button" class="secondary">Reset basket and log</button>
+    </section>
+  </main>
+  <footer>Practice environment only. All enquiries and purchases are simulated.</footer>
+  <script>
+    // These listeners describe page actions. You will decide which GTM tags listen for them.
+    const byId = (id) => document.getElementById(id);
+    const product = { item_id: 'NOTEBOOK-001', item_name: 'Practice notebook', price: 19 };
+    let quantity = 0;
+    let logEntries = [];
+
+    function recordAction(event, parameters = {}) {
+      const payload = { event, ...parameters };
+      window.dataLayer.push(payload);
+      logEntries.unshift(JSON.stringify(payload, null, 2));
+      logEntries = logEntries.slice(0, 12);
+      byId('action-log').textContent = logEntries.join('\n\n');
+    }
+
+    byId('hero-cta').addEventListener('click', () => {
+      recordAction('cta_click', { cta_id: 'hero-cta', cta_location: 'hero' });
+      byId('cta-message').textContent = 'Button clicked. Your action is visible in the local log below.';
+    });
+
+    byId('enquiry-form').addEventListener('submit', (event) => {
+      event.preventDefault();
+      if (!event.currentTarget.checkValidity()) return;
+      recordAction('generate_lead', { form_id: 'enquiry-form', enquiry_topic: byId('enquiry-topic').value });
+      byId('form-message').textContent = 'Mock enquiry completed successfully. No email was sent.';
+      event.currentTarget.reset();
+    });
+
+    byId('add-to-cart').addEventListener('click', () => {
+      quantity += 1;
+      window.dataLayer.push({ ecommerce: null });
+      recordAction('add_to_cart', { ecommerce: { currency: 'EUR', value: product.price, items: [{ ...product, quantity: 1 }] } });
+      byId('simulate-purchase').disabled = false;
+      byId('cart-message').textContent = `Basket: ${quantity} notebook(s). Total: €${(quantity * product.price).toFixed(2)}.`;
+    });
+
+    byId('simulate-purchase').addEventListener('click', () => {
+      if (quantity === 0) return;
+      const transactionId = `TEST-${crypto.randomUUID()}`;
+      window.dataLayer.push({ ecommerce: null });
+      recordAction('purchase', { ecommerce: { transaction_id: transactionId, currency: 'EUR', value: quantity * product.price, items: [{ ...product, quantity }] } });
+      quantity = 0;
+      byId('simulate-purchase').disabled = true;
+      byId('cart-message').textContent = 'Simulated purchase complete. Basket emptied. No money was charged.';
+    });
+
+    byId('reset-practice').addEventListener('click', () => {
+      quantity = 0;
+      logEntries = [];
+      byId('simulate-purchase').disabled = true;
+      byId('cart-message').textContent = 'Your basket is empty.';
+      byId('cta-message').textContent = '';
+      byId('form-message').textContent = '';
+      byId('enquiry-form').reset();
+      byId('action-log').textContent = 'No actions yet.';
+      // Do not overwrite dataLayer: already queued or sent events are not erased.
+    });
+  </script>
+</body>
+</html>
